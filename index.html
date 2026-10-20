@@ -1,0 +1,1241 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Citator · Harvard Manchester</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235b2a86'/%3E%3Ctext x='16' y='25' font-size='22' text-anchor='middle' fill='%23f6c453' font-family='Georgia'%3E%E2%80%9D%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #f6f3ec;
+  --bg-2: #efeadf;
+  --card: #fffdf9;
+  --ink: #1e1b24;
+  --ink-2: #4c4656;
+  --ink-3: #8a8393;
+  --line: #e4ddcf;
+  --line-2: #d6cdbb;
+  --accent: #5b2a86;
+  --accent-2: #7a42ad;
+  --accent-soft: #efe6f7;
+  --gold: #f2b632;
+  --gold-soft: #fbf0d3;
+  --warn: #8a5a00;
+  --warn-bg: #fdf3dc;
+  --ok: #1f7a4d;
+  --miss: #b4361f;
+  --miss-bg: #fbe4de;
+  --shadow: 0 1px 2px rgba(30,20,40,.04), 0 8px 30px rgba(40,20,60,.07);
+  --radius: 18px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131118; --bg-2: #1b1822; --card: #1d1a24; --ink: #f1edf6; --ink-2: #c4bccf; --ink-3: #8b8396;
+    --line: #2d2836; --line-2: #3a3445; --accent: #b78ae6; --accent-2: #c9a3f0; --accent-soft: #2a2236;
+    --gold: #f2c053; --gold-soft: #2e2716; --warn: #f0c46a; --warn-bg: #2b2414; --ok: #59c48e;
+    --miss: #ff8f78; --miss-bg: #3a1f1b; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131118; --bg-2: #1b1822; --card: #1d1a24; --ink: #f1edf6; --ink-2: #c4bccf; --ink-3: #8b8396;
+  --line: #2d2836; --line-2: #3a3445; --accent: #b78ae6; --accent-2: #c9a3f0; --accent-soft: #2a2236;
+  --gold: #f2c053; --gold-soft: #2e2716; --warn: #f0c46a; --warn-bg: #2b2414; --ok: #59c48e;
+  --miss: #ff8f78; --miss-bg: #3a1f1b; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  background-image: radial-gradient(1200px 500px at 50% -200px, var(--accent-soft), transparent 70%);
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font: 15px/1.55 Inter, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+header.top { display: flex; align-items: center; justify-content: space-between; padding: 22px 0 6px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.mark {
+  width: 34px; height: 34px; border-radius: 10px; background: var(--accent); color: var(--gold);
+  display: grid; place-items: center; font: 30px/1 "Instrument Serif", Georgia, serif; padding-top: 12px;
+}
+.brand-name { font: 24px/1 "Instrument Serif", Georgia, serif; letter-spacing: .2px; }
+.brand-sub { white-space: nowrap; font-size: 11.5px; color: var(--ink-3); letter-spacing: .08em; text-transform: uppercase; margin-top: 3px; }
+.top-actions { display: flex; gap: 6px; align-items: center; }
+.icon-btn {
+  height: 36px; min-width: 36px; padding: 0 10px; border-radius: 10px; border: 1px solid transparent;
+  background: transparent; color: var(--ink-2); display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  transition: background .15s, border-color .15s;
+}
+.icon-btn:hover { background: var(--card); border-color: var(--line); }
+.icon-btn svg { width: 18px; height: 18px; }
+.badge {
+  min-width: 20px; height: 20px; border-radius: 99px; background: var(--accent); color: #fff;
+  font-size: 11.5px; font-weight: 600; display: inline-grid; place-items: center; padding: 0 6px;
+}
+:root[data-theme="dark"] .badge { color: #1b1426; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .badge { color: #1b1426; } }
+
+/* Hero */
+.hero { text-align: center; padding: 48px 0 26px; }
+.hero h1 { font: 400 clamp(38px, 6vw, 56px)/1.05 "Instrument Serif", Georgia, serif; margin: 0 0 12px; letter-spacing: -.5px; }
+.hero h1 em { color: var(--accent); }
+.hero p { margin: 0; color: var(--ink-2); }
+
+.inputbar {
+  margin: 26px auto 0; display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 16px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow);
+  transition: border-color .2s, box-shadow .2s;
+}
+.inputbar:focus-within { border-color: var(--accent); box-shadow: var(--shadow), 0 0 0 4px var(--accent-soft); }
+.inputbar svg { width: 20px; height: 20px; color: var(--ink-3); flex: none; }
+.inputbar input {
+  flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 16.5px; padding: 10px 4px;
+}
+.inputbar input::placeholder { color: var(--ink-3); }
+.btn {
+  border: 0; border-radius: 11px; padding: 11px 18px; font-weight: 600; font-size: 14.5px;
+  display: inline-flex; align-items: center; gap: 8px; transition: transform .08s, background .15s, opacity .15s; white-space: nowrap;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-2); }
+:root[data-theme="dark"] .btn-primary { color: #1b1426; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-primary { color: #1b1426; } }
+.btn-ghost { background: transparent; color: var(--ink-2); border: 1px solid var(--line); }
+.btn-ghost:hover { background: var(--bg-2); }
+.btn-sm { padding: 7px 12px; font-size: 13px; border-radius: 9px; }
+.btn svg { width: 16px; height: 16px; }
+.hint { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
+kbd {
+  font: 500 11.5px/1 Inter, sans-serif; padding: 3px 6px; border-radius: 6px; border: 1px solid var(--line-2);
+  border-bottom-width: 2px; background: var(--card); color: var(--ink-2);
+}
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 18px; }
+.chip { font-size: 12px; color: var(--ink-3); border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px; background: color-mix(in srgb, var(--card) 60%, transparent); }
+
+/* Result card */
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+  margin-top: 26px; overflow: hidden; scroll-margin-top: 16px;
+}
+.card.fresh { animation: rise .35s cubic-bezier(.2,.8,.2,1); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.type-select {
+  appearance: none; border: 1px solid var(--line); background: var(--bg-2); border-radius: 99px;
+  padding: 6px 30px 6px 12px; font-size: 13px; font-weight: 600; color: var(--accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8393' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+}
+.src { font-size: 12px; color: var(--ink-3); display: flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
+.src .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); flex: none; }
+.src .dot.warn { background: var(--gold); }
+.src span.u { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360px; }
+
+.ref-block { padding: 24px 22px 8px; }
+.label { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+.reference {
+  font: 18.5px/1.6 "Source Serif 4", Georgia, "Times New Roman", serif; color: var(--ink);
+  word-break: break-word; overflow-wrap: anywhere; padding: 2px 0; border-radius: 6px;
+}
+.reference i { font-style: italic; }
+.miss { color: var(--miss); background: var(--miss-bg); border-radius: 4px; padding: 0 3px; font-style: normal; font-family: Inter, sans-serif; font-size: .82em; }
+.ref-actions { display: flex; gap: 8px; flex-wrap: wrap; padding: 16px 22px 20px; align-items: center; }
+.ref-actions .spacer { flex: 1; }
+
+.intext { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 22px 20px; }
+.intext-item {
+  border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: var(--bg); min-width: 0;
+}
+.intext-item .k { font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .07em; font-weight: 600; }
+.intext-item .v { font: 15.5px/1.4 "Source Serif 4", Georgia, serif; overflow-wrap: anywhere; }
+.copy-mini {
+  border: 1px solid var(--line); background: var(--card); border-radius: 8px; width: 32px; height: 32px; flex: none;
+  display: grid; place-items: center; color: var(--ink-2); transition: all .15s;
+}
+.copy-mini:hover { color: var(--accent); border-color: var(--accent); }
+.copy-mini svg { width: 15px; height: 15px; }
+.copy-mini.done { color: var(--ok); border-color: var(--ok); }
+
+.warnings { margin: 0 22px 18px; border-radius: 12px; background: var(--warn-bg); color: var(--warn); padding: 10px 14px; font-size: 13.5px; }
+.warnings ul { margin: 4px 0 0; padding-left: 18px; }
+.warnings li { margin: 2px 0; }
+.warnings strong { font-weight: 600; }
+
+details.edit { border-top: 1px solid var(--line); }
+details.edit summary {
+  list-style: none; cursor: pointer; padding: 14px 22px; font-weight: 600; font-size: 14px; color: var(--ink-2);
+  display: flex; align-items: center; gap: 8px; user-select: none;
+}
+details.edit summary::-webkit-details-marker { display: none; }
+details.edit summary svg { width: 16px; height: 16px; transition: transform .2s; }
+details.edit[open] summary svg.chev { transform: rotate(90deg); }
+details.edit summary .sub { font-weight: 400; color: var(--ink-3); font-size: 13px; }
+.fields { padding: 0 22px 22px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px 12px; }
+.field { display: flex; flex-direction: column; gap: 5px; grid-column: span 6; }
+.field.s3 { grid-column: span 3; } .field.s2 { grid-column: span 2; } .field.s4 { grid-column: span 4; }
+.field label { font-size: 12px; font-weight: 600; color: var(--ink-2); }
+.field label .opt { font-weight: 400; color: var(--ink-3); }
+.field input, .field select, .field textarea {
+  border: 1px solid var(--line); background: var(--bg); border-radius: 10px; padding: 9px 11px; outline: none; width: 100%;
+  transition: border-color .15s, box-shadow .15s;
+}
+.field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.field .help { font-size: 12px; color: var(--ink-3); }
+.authors-list { display: flex; flex-direction: column; gap: 8px; }
+.author-row { display: grid; grid-template-columns: auto 1fr 1fr auto; gap: 8px; align-items: center; }
+.author-row.org { grid-template-columns: auto 1fr auto; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; background: var(--bg); }
+.seg button { border: 0; background: transparent; padding: 7px 9px; font-size: 12px; color: var(--ink-3); }
+.seg button.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.rm { border: 0; background: transparent; color: var(--ink-3); width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; }
+.rm:hover { background: var(--miss-bg); color: var(--miss); }
+.rm svg { width: 15px; height: 15px; }
+.add-author { align-self: flex-start; }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.switch { position: relative; width: 38px; height: 22px; flex: none; }
+.switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+.switch span { position: absolute; inset: 0; background: var(--line-2); border-radius: 99px; transition: .2s; cursor: pointer; }
+.switch span::after { content: ""; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.switch input:checked + span { background: var(--accent); }
+.switch input:checked + span::after { transform: translateX(16px); }
+
+/* Loading */
+.loading { padding: 26px 22px; }
+.sk { height: 14px; border-radius: 7px; background: linear-gradient(90deg, var(--bg-2), var(--line), var(--bg-2)); background-size: 200% 100%; animation: sh 1.2s infinite; margin: 10px 0; }
+@keyframes sh { to { background-position: -200% 0; } }
+.loading .msg { font-size: 13px; color: var(--ink-3); margin-top: 14px; }
+
+.error { padding: 18px 22px; color: var(--miss); display: flex; gap: 10px; align-items: flex-start; }
+.error svg { width: 20px; height: 20px; flex: none; margin-top: 1px; }
+
+/* Reference list */
+section.list { margin: 40px 0 30px; }
+.list-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.list-head h2 { font: 400 30px/1.1 "Instrument Serif", Georgia, serif; margin: 0; }
+.list-head .sub { color: var(--ink-3); font-size: 13px; margin-top: 4px; }
+.list-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.list-box { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.list-item { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 14px 16px 14px 20px; border-bottom: 1px solid var(--line); align-items: start; }
+.list-item:last-child { border-bottom: 0; }
+.list-item .reference { font-size: 16px; padding-left: 1.6em; text-indent: -1.6em; }
+.list-item .meta { font-size: 12.5px; color: var(--ink-3); margin-top: 4px; padding-left: 0; }
+.list-item .meta i { font-style: normal; color: var(--ink-2); font-family: "Source Serif 4", Georgia, serif; }
+.list-item .acts { display: flex; gap: 4px; }
+.empty { padding: 26px; text-align: center; color: var(--ink-3); font-size: 14px; }
+
+/* Popover */
+.pop {
+  position: absolute; right: 20px; top: 64px; width: 330px; max-width: calc(100vw - 32px); background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(20,10,30,.18); padding: 16px; z-index: 50; display: none;
+}
+.pop.open { display: block; animation: rise .2s; }
+.pop h3 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); }
+.pop .row { padding: 10px 0; border-top: 1px solid var(--line); }
+.pop .row:first-of-type { border-top: 0; }
+.pop .row .t { font-weight: 500; font-size: 14px; }
+.pop .row .d { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+.pop select { width: 100%; margin-top: 8px; border: 1px solid var(--line); background: var(--bg); border-radius: 9px; padding: 7px 9px; }
+
+/* Toast */
+.toast {
+  position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  background: var(--ink); color: var(--bg); padding: 11px 16px; border-radius: 12px; font-size: 14px; font-weight: 500;
+  display: flex; gap: 8px; align-items: center; transition: all .25s cubic-bezier(.2,.8,.2,1); z-index: 100; max-width: calc(100vw - 32px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast svg { width: 16px; height: 16px; color: var(--gold); flex: none; }
+
+footer { text-align: center; color: var(--ink-3); font-size: 12.5px; padding: 30px 0 40px; }
+footer a { color: var(--ink-2); }
+
+@media (max-width: 640px) {
+  .hero { padding-top: 26px; }
+  .intext { grid-template-columns: 1fr; }
+  .field.s3, .field.s2, .field.s4 { grid-column: span 6; }
+  .author-row { grid-template-columns: 1fr 1fr auto; }
+  .author-row .seg { grid-column: 1 / -1; justify-self: start; }
+  .inputbar { padding-left: 12px; }
+  .inputbar .btn span.lbl { display: none; }
+  .reference { font-size: 17px; }
+  .src span.u { max-width: 150px; }
+  .brand-sub { font-size: 10px; letter-spacing: .06em; }
+}
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/" aria-label="Citator home">
+      <div class="mark" aria-hidden="true">”</div>
+      <div>
+        <div class="brand-name">Citator</div>
+        <div class="brand-sub">Harvard Manchester</div>
+      </div>
+    </a>
+    <div class="top-actions">
+      <button class="icon-btn" id="goList" title="Reference list">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>
+        <span class="badge" id="listCount">0</span>
+      </button>
+      <button class="icon-btn" id="themeBtn" title="Toggle dark mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
+      <button class="icon-btn" id="settingsBtn" title="Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="pop" id="settings" role="dialog" aria-label="Settings">
+    <h3>Settings</h3>
+    <div class="row toggle-row">
+      <div><div class="t">Sentence-case titles</div><div class="d">Guide rule: only the first word and proper nouns capitalised.</div></div>
+      <label class="switch"><input type="checkbox" id="setSentence"><span></span></label>
+    </div>
+    <div class="row toggle-row">
+      <div><div class="t">Two-digit days</div><div class="d">“07 September 2023” instead of “7 September 2023”.</div></div>
+      <label class="switch"><input type="checkbox" id="setPad"><span></span></label>
+    </div>
+    <div class="row">
+      <div class="t">Font when pasting</div>
+      <div class="d">Word and Google Docs keep italics either way.</div>
+      <select id="setFont">
+        <option value="">Match my document</option>
+        <option value="Arial|11pt">Arial 11</option>
+        <option value="Arial|12pt">Arial 12</option>
+        <option value="Calibri|11pt">Calibri 11</option>
+        <option value="Calibri|12pt">Calibri 12</option>
+        <option value="Times New Roman|12pt">Times New Roman 12</option>
+        <option value="Georgia|12pt">Georgia 12</option>
+      </select>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <h1>Paste a link.<br><em>Get the reference.</em></h1>
+      <p>Formatted to the University of Manchester Library’s Harvard Manchester guide.</p>
+      <form class="inputbar" id="form" autocomplete="off">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+        <label for="url" class="sr">Link, DOI or ISBN</label>
+        <input id="url" type="text" inputmode="url" placeholder="https://… , a DOI or an ISBN" spellcheck="false" autofocus>
+        <button class="btn btn-primary" type="submit" id="citeBtn">
+          <span class="lbl">Cite</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+      <div class="hint">Press <kbd>⌘</kbd> <kbd>V</kbd> anywhere to paste &amp; cite · paste several links at once to build a list</div>
+      <div class="chips" aria-label="Supported sources">
+        <span class="chip">Web pages</span><span class="chip">News</span><span class="chip">Journal articles</span><span class="chip">Blogs</span>
+        <span class="chip">YouTube · X · TikTok</span><span class="chip">Wikipedia</span><span class="chip">Reports &amp; PDFs</span><span class="chip">Books (ISBN)</span>
+      </div>
+    </section>
+
+    <div id="result"></div>
+
+    <section class="list" id="listSection">
+      <div class="list-head">
+        <div>
+          <h2>Reference list</h2>
+          <div class="sub">Alphabetical, ready to paste at the end of your assignment.</div>
+        </div>
+        <div class="list-actions">
+          <button class="btn btn-ghost btn-sm" id="clearList">Clear</button>
+          <button class="btn btn-primary btn-sm" id="copyList">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy all
+          </button>
+        </div>
+      </div>
+      <div class="list-box" id="listBox"></div>
+    </section>
+  </main>
+
+  <footer>
+    Built on the <a href="https://subjects.library.manchester.ac.uk/referencing/harvardlist" target="_blank" rel="noopener">Harvard Manchester A–Z guide</a>.
+    Metadata comes from the page itself — glance over each reference before you submit.<br>
+    An unofficial student tool, not affiliated with the University of Manchester.
+  </footer>
+</div>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg"></span></div>
+
+<script>
+"use strict";
+/* =========================================================================
+   Harvard Manchester formatting engine
+   ========================================================================= */
+
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const TYPES = {
+  webpage:    "Webpage",
+  news:       "Newspaper article",
+  blog:       "Blog",
+  journal:    "Journal article",
+  wikipedia:  "Wikipedia (wiki)",
+  social:     "Social media / video",
+  report:     "Report / government publication",
+  book:       "Book / e-book",
+  chapter:    "Chapter in an edited book",
+  conference: "Conference paper",
+  podcast:    "Podcast",
+  preprint:   "Preprint / unpublished",
+};
+
+const settings = loadJSON("citator.settings", { sentence: true, pad: false, font: "" });
+
+function loadJSON(key, dflt) {
+  try { const v = JSON.parse(localStorage.getItem(key)); return v ? Object.assign({}, dflt, v) : dflt; }
+  catch { return dflt; }
+}
+function saveJSON(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch {} }
+
+function todayISO() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+
+/** Forgiving date parser -> "YYYY", "YYYY-MM" or "YYYY-MM-DD" (UK day/month order). */
+function parseLooseDate(s) {
+  s = String(s || "").trim();
+  if (!s) return "";
+  let m;
+  if ((m = s.match(/^(\d{4})(?:-(\d{1,2})(?:-(\d{1,2}))?)?$/))) {
+    return [m[1], m[2] && m[2].padStart(2,"0"), m[3] && m[3].padStart(2,"0")].filter(Boolean).join("-");
+  }
+  if ((m = s.match(/^(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})$/))) return `${m[3]}-${m[2].padStart(2,"0")}-${m[1].padStart(2,"0")}`;
+  const mi = (w) => MONTHS.findIndex(x => x.toLowerCase().startsWith(w.toLowerCase().slice(0,3))) + 1;
+  if ((m = s.match(/^(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]{3,})\.?,?\s+(\d{4})$/)) && mi(m[2])) return `${m[3]}-${String(mi(m[2])).padStart(2,"0")}-${m[1].padStart(2,"0")}`;
+  if ((m = s.match(/^([A-Za-z]{3,})\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})$/)) && mi(m[1])) return `${m[3]}-${String(mi(m[1])).padStart(2,"0")}-${m[2].padStart(2,"0")}`;
+  if ((m = s.match(/^([A-Za-z]{3,})\.?\s+(\d{4})$/)) && mi(m[1])) return `${m[2]}-${String(mi(m[1])).padStart(2,"0")}`;
+  return s; // leave as typed (e.g. "ca. 1648-9")
+}
+
+function fmtDate(iso, opts = {}) {
+  // opts: { year: true|false }
+  const m = String(iso || "").match(/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/);
+  if (!m) return iso || "";
+  const [, y, mo, d] = m;
+  const parts = [];
+  if (d) parts.push(settings.pad ? d : String(+d));
+  if (mo) parts.push(MONTHS[+mo - 1]);
+  if (opts.year !== false) parts.push(y);
+  return parts.join(" ");
+}
+
+function yearOf(r) {
+  const m = String(r.date || "").match(/^(\d{4})/);
+  return m ? m[1] : (r.date && !/^\d/.test(r.date) ? r.date : "");
+}
+function yearLabel(r) { return (yearOf(r) || "no date") + (r._suffix || ""); }
+
+/** "Mary-Jane" -> "M.-J.", "R.A." -> "R. A.", "K. Jarrod" -> "K. J." */
+function initials(given) {
+  return String(given || "")
+    .replace(/\./g, ". ").split(/\s+/).filter(Boolean)
+    .map(tok => tok.split("-").filter(Boolean).map(p => {
+      const ch = p.match(/\p{L}/u);
+      return ch ? ch[0].toUpperCase() + "." : "";
+    }).filter(Boolean).join("-"))
+    .filter(Boolean).join(" ");
+}
+
+function isOrg(a) { return a && a.org != null; }
+function refName(a) {
+  if (isOrg(a)) return a.org.trim();
+  const ini = initials(a.given);
+  return (a.family || "").trim() + (ini ? ", " + ini : "");
+}
+function citeName(a) { return isOrg(a) ? a.org.trim() : (a.family || "").trim(); }
+function displayName(a) { return isOrg(a) ? a.org.trim() : [a.given, a.family].filter(Boolean).join(" ").trim(); }
+
+function validAuthors(list) {
+  return (list || []).filter(a => isOrg(a) ? a.org && a.org.trim() : (a.family || "").trim());
+}
+
+/** Reference-list author string: 1-3 named in full, 4+ -> "First, I., et al." */
+function authorsRef(list) {
+  const names = list.map(refName);
+  if (names.length >= 4) return names[0] + ", et al.";
+  if (names.length === 3) return `${names[0]}, ${names[1]} and ${names[2]}`;
+  if (names.length === 2) return `${names[0]} and ${names[1]}`;
+  return names[0] || "";
+}
+/** In-text author string: A / A and B / A, B and C / A et al. */
+function authorsCite(list) {
+  const n = list.map(citeName);
+  if (n.length >= 4) return n[0] + " et al.";
+  if (n.length === 3) return `${n[0]}, ${n[1]} and ${n[2]}`;
+  if (n.length === 2) return `${n[0]} and ${n[1]}`;
+  return n[0] || "";
+}
+
+function ordinal(n) {
+  const s = String(n).trim();
+  if (!/^\d+$/.test(s)) return s;
+  const v = +s % 100;
+  const suf = (v >= 11 && v <= 13) ? "th" : ({1: "st", 2: "nd", 3: "rd"}[+s % 10] || "th");
+  return s + suf;
+}
+function editionText(ed) {
+  ed = String(ed || "").trim();
+  if (!ed || /^(1|1st|first)$/i.test(ed)) return "";
+  if (/edn\.?$/i.test(ed)) return ed.replace(/edn\.?$/i, "edn.");
+  const m = ed.match(/^(\d+)(?:st|nd|rd|th)?\s*(rev(?:ised)?)?/i);
+  if (m) return `${ordinal(m[1])}${m[2] ? " rev" : ""} edn.`;
+  if (/^rev/i.test(ed)) return "rev edn.";
+  return ed + " edn.";
+}
+function pagesText(p) {
+  p = String(p || "").trim().replace(/[–—]/g, "-").replace(/\s*-\s*/g, "-").replace(/^pp?\.\s*/i, "");
+  if (!p) return "";
+  if (/^[ivxlcdm]+(-[ivxlcdm]+)?$/i.test(p)) return p;        // roman numerals: no p./pp.
+  return (p.includes("-") || p.includes(",") ? "pp. " : "p. ") + p;
+}
+
+function titleOf(r) {
+  const t = (settings.sentence && r.titleSentence) ? r.titleSentence : r.title;
+  return (t || "").trim();
+}
+function endsWithStop(s) { return /[.?!]["'’”]?$/.test(String(s).trim()); }
+
+/* Segment helpers: {t, i (italic), m (missing placeholder)} */
+const T = (t) => ({ t });
+const I = (t) => ({ t, i: true });
+const M = (t) => ({ t: `[${t}]`, m: true });
+
+function titleSeg(r, italic, ph = "Title") {
+  const t = titleOf(r);
+  if (!t) return M(ph);
+  return italic ? I(t) : T(t);
+}
+/** Quoted title: 'Title' – punctuation handled by caller. */
+function quoted(r, ph = "Title") {
+  const t = titleOf(r);
+  return t ? T(`'${t}'`) : M(ph);
+}
+/** Full stop after an italic title unless it already ends in ?/!/. */
+function stopAfter(text) { return endsWithStop(text) ? "" : "."; }
+
+function availability(r, { allowDoi = true } = {}) {
+  const doi = String(r.doi || "").trim().replace(/^https?:\/\/(dx\.)?doi\.org\//i, "").replace(/^doi:\s*/i, "");
+  if (allowDoi && doi) return [T(` https://doi.org/${doi}.`)];
+  const url = String(r.url || "").trim();
+  if (!url) return [];
+  return [T(` Available at: ${url} (Accessed: ${fmtDate(r.accessed || todayISO())}).`)];
+}
+
+/** Who goes in the author position, and how. */
+function leadAuthor(r) {
+  const people = validAuthors(r.authors);
+  if (people.length) return { kind: "authors", list: people };
+  const org = (r.container || r.siteName || "").trim();
+  switch (r.type) {
+    case "webpage": case "report": case "podcast":
+      return org ? { kind: "authors", list: [{ org }], inferred: true } : { kind: "title" };
+    case "news": case "blog":
+      return org ? { kind: "authors", list: [{ org }], inferred: true } : { kind: "title" };
+    case "social":
+      return { kind: "missing", label: "Screen name" };
+    default:
+      return { kind: "title" };
+  }
+}
+
+function leadSegs(r, lead) {
+  const y = yearLabel(r);
+  if (r.type === "social" && lead.kind === "authors") {
+    return [T(`${lead.list.map(displayName).join(" and ")} (${y}).`)];
+  }
+  if (lead.kind === "authors") {
+    let s = authorsRef(lead.list);
+    if (r.editorsAsAuthors) s += lead.list.length > 1 ? " (eds.)" : " (ed.)";
+    return [T(`${s} (${y}).`)];
+  }
+  if (lead.kind === "missing") return [M(lead.label), T(` (${y}).`)];
+  return null; // title-led
+}
+
+function formatReference(r) {
+  const lead = leadAuthor(r);
+  const L = leadSegs(r, lead);
+  const y = yearLabel(r);
+  const t = titleOf(r);
+  const out = [];
+  const push = (...s) => out.push(...s.flat());
+
+  // Title-led references (no author): Title. (Year). …
+  const titleLed = !L;
+
+  switch (r.type) {
+    case "wikipedia": {
+      push(quoted(r), T(`, (${y}). `), I((r.container || "Wikipedia").trim()), T("."), availability(r, { allowDoi: false }));
+      break;
+    }
+    case "news": {
+      if (titleLed) push(quoted(r), T(` (${y}).`)); else push(L, T(" "), quoted(r));
+      const paper = (r.container || "").trim();
+      push(T(", "), paper ? I(paper) : M("Newspaper"));
+      const dm = /^\d{4}-\d{2}-\d{2}$/.test(r.date || "") ? fmtDate(r.date, { year: false }) : "";
+      push(T(dm ? `, ${dm}.` : "."), availability(r, { allowDoi: false }));
+      break;
+    }
+    case "blog": {
+      if (titleLed) push(quoted(r), T(` (${y}).`)); else push(L, T(" "), quoted(r));
+      const blog = (r.container || "").trim();
+      push(T(", "), blog ? I(blog) : M("Blog name"));
+      const bd = r.blogDate || r.date;
+      push(T(/^\d{4}-\d{2}-\d{2}$/.test(bd || "") ? `, ${fmtDate(bd)}.` : "."), availability(r, { allowDoi: false }));
+      break;
+    }
+    case "journal": {
+      if (titleLed) push(quoted(r), T(` (${y}).`)); else push(L, T(" "), quoted(r));
+      const j = (r.container || "").trim();
+      push(T(", "), j ? I(j) : M("Journal"));
+      const vol = String(r.volume || "").trim(), iss = String(r.issue || "").trim();
+      const pg = pagesText(r.pages) || (r.articleNumber ? `p. ${String(r.articleNumber).trim()}` : "");
+      let tail = "";
+      if (vol) tail += `, ${vol}${iss ? ` (${iss})` : ""}`;
+      else if (iss) tail += `, (${iss})`;
+      if (pg) tail += `, ${pg}`;
+      push(T(tail + "."), availability(r));
+      break;
+    }
+    case "social": {
+      if (titleLed) push(M("Screen name"), T(` (${y}).`)); else push(L);
+      push(T(" "), t ? I(t) : M("Post text / video title"));
+      const plat = (r.platform || "").trim();
+      push(T(" "), plat ? T(`[${plat}]`) : M("[Platform]"));
+      push(T(r.postTime ? ` ${r.postTime.trim()}.` : "."), availability(r, { allowDoi: false }));
+      break;
+    }
+    case "report": {
+      if (titleLed) push(titleSeg(r, true), T(`. (${y}).`)); else push(L, T(" "), titleSeg(r, true));
+      const rn = String(r.reportNumber || "").trim();
+      if (!titleLed) push(T(rn ? ` (${rn}).` : stopAfter(t)));
+      else if (rn) push(T(` (${rn}).`));
+      const org = (r.container || "").trim();
+      const authorIsPerson = validAuthors(r.authors).some(a => !isOrg(a));
+      if (org && authorIsPerson) push(T(` ${org}.`));
+      push(availability(r));
+      break;
+    }
+    case "book": {
+      if (titleLed) push(titleSeg(r, true), T(`${stopAfter(t)} (${y}).`)); else push(L, T(" "), titleSeg(r, true), T(stopAfter(t)));
+      const ed = editionText(r.edition);
+      if (ed) push(T(` ${ed}`));
+      const place = (r.place || "").trim(), pub = (r.publisher || "").trim();
+      if (place || pub) push(T(" "), place ? T(place) : M("Place"), T(": "), pub ? T(pub) : M("Publisher"), T("."));
+      else push(T(" "), M("Place: Publisher"), T("."));
+      push(availability(r));
+      break;
+    }
+    case "chapter": {
+      if (titleLed) push(quoted(r), T(` (${y}).`)); else push(L, T(" "), quoted(r));
+      push(T(", in "));
+      const eds = validAuthors(r.editors);
+      if (eds.length) push(T(`${authorsRef(eds)} (${eds.length > 1 ? "eds." : "ed."}) `));
+      const bt = (r.container || "").trim();
+      push(bt ? I(bt) : M("Book title"), T(bt ? stopAfter(bt) : "."));
+      const place = (r.place || "").trim(), pub = (r.publisher || "").trim(), pg = pagesText(r.pages);
+      if (place || pub) push(T(" "), place ? T(place) : M("Place"), T(": "), pub ? T(pub) : M("Publisher"));
+      push(T(pg ? `, ${pg}.` : (place || pub ? "." : "")));
+      push(availability(r));
+      break;
+    }
+    case "conference": {
+      if (titleLed) push(quoted(r), T(` (${y}).`)); else push(L, T(" "), quoted(r));
+      const c = (r.container || "").trim();
+      push(T(", "), c ? I(c) : M("Conference name"));
+      const loc = (r.conferenceLocation || "").trim(), cd = (r.conferenceDate || "").trim(), pg = pagesText(r.pages);
+      if (loc) push(T(`, ${loc}.`)); else push(T("."));
+      if (cd) push(T(` ${cd}.`));
+      if (pg) push(T(` ${pg}.`));
+      push(availability(r));
+      break;
+    }
+    case "podcast": {
+      if (titleLed) push(titleSeg(r, true), T(` (${y}).`)); else push(L, T(" "), titleSeg(r, true));
+      push(T(" [Podcast]."));
+      const dm = /^\d{4}-\d{2}-\d{2}$/.test(r.date || "") ? fmtDate(r.date, { year: false }) : "";
+      if (dm) push(T(` ${dm}.`));
+      push(availability(r, { allowDoi: false }));
+      break;
+    }
+    case "preprint": {
+      if (titleLed) push(titleSeg(r, true), T(` (${y}).`)); else push(L, T(" "), titleSeg(r, true), T(stopAfter(t)));
+      const srv = (r.container || "").trim();
+      push(T(" Preprint."), srv ? T(` ${srv}.`) : T(""), T(" Unpublished."));
+      push(availability(r));
+      break;
+    }
+    default: { // webpage
+      if (titleLed) push(titleSeg(r, true), T(`${stopAfter(t)} (${y}).`));
+      else push(L, T(" "), titleSeg(r, true), T(stopAfter(t)));
+      push(availability(r));
+    }
+  }
+  return tidy(out);
+}
+
+/** Merge adjacent plain segments, collapse double spaces / stops. */
+function tidy(segs) {
+  const out = [];
+  for (const s of segs) {
+    if (!s || s.t === "") continue;
+    const prev = out[out.length - 1];
+    if (prev && !prev.i && !prev.m && !s.i && !s.m) prev.t += s.t;
+    else out.push({ ...s });
+  }
+  for (const s of out) if (!s.i && !s.m) s.t = s.t.replace(/ {2,}/g, " ").replace(/\.\.(?!\.)/g, ".");
+  // Avoid "?." when an italic title ending in ? is followed by a full stop
+  for (let k = 1; k < out.length; k++) {
+    if (out[k - 1].i && /[?!]$/.test(out[k - 1].t) && /^\./.test(out[k].t)) out[k].t = out[k].t.slice(1);
+  }
+  return out;
+}
+
+function formatInText(r) {
+  const lead = leadAuthor(r);
+  const y = yearLabel(r);
+  if (r.type === "wikipedia" || (lead.kind === "title" && ["news","blog","journal","chapter","conference"].includes(r.type))) {
+    const q = titleOf(r) ? `'${titleOf(r)}'` : "[Title]";
+    return { paren: [T(`(${q}, ${y})`)], narr: [T(`${q} (${y})`)] };
+  }
+  if (lead.kind === "authors") {
+    const who = r.type === "social" ? lead.list.map(displayName).join(" and ") : authorsCite(lead.list);
+    return { paren: [T(`(${who}, ${y})`)], narr: [T(`${who} (${y})`)] };
+  }
+  if (lead.kind === "missing") return { paren: [T("("), M(lead.label), T(`, ${y})`)], narr: [M(lead.label), T(` (${y})`)] };
+  const t = titleOf(r);
+  return {
+    paren: [T("("), t ? I(t) : M("Title"), T(`, ${y})`)],
+    narr: [t ? I(t) : M("Title"), T(` (${y})`)],
+  };
+}
+
+/* Rendering ------------------------------------------------------------ */
+const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+function segsToHTML(segs, { forClipboard = false } = {}) {
+  return segs.map(s => {
+    if (s.i) return `<i>${esc(s.t)}</i>`;
+    if (s.m) return forClipboard ? esc(s.t) : `<span class="miss">${esc(s.t.replace(/^\[|\]$/g, ""))}</span>`;
+    return esc(s.t);
+  }).join("");
+}
+const segsToText = (segs) => segs.map(s => s.t).join("");
+const hasMissing = (segs) => segs.some(s => s.m);
+
+/* =========================================================================
+   Clipboard
+   ========================================================================= */
+function wrapForClipboard(innerParas) {
+  let style = "";
+  if (settings.font) {
+    const [fam, size] = settings.font.split("|");
+    style = ` style="font-family:'${fam}';font-size:${size}"`;
+  }
+  return `<meta charset="utf-8">` + innerParas.map(p => `<p${style}>${p}</p>`).join("");
+}
+async function copyRich(html, text) {
+  try {
+    if (navigator.clipboard && window.ClipboardItem) {
+      await navigator.clipboard.write([new ClipboardItem({
+        "text/html": new Blob([html], { type: "text/html" }),
+        "text/plain": new Blob([text], { type: "text/plain" }),
+      })]);
+      return true;
+    }
+  } catch (e) { /* fall through */ }
+  const div = document.createElement("div");
+  div.contentEditable = "true";
+  div.style.cssText = "position:fixed;left:-9999px;top:0;white-space:pre-wrap";
+  div.innerHTML = html;
+  document.body.appendChild(div);
+  const range = document.createRange(); range.selectNodeContents(div);
+  const sel = getSelection(); sel.removeAllRanges(); sel.addRange(range);
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch {}
+  sel.removeAllRanges(); div.remove();
+  return ok;
+}
+async function copySegs(segs, btn) {
+  const ok = await copyRich(wrapForClipboard([segsToHTML(segs, { forClipboard: true })]), segsToText(segs));
+  flashButton(btn, ok);
+  toast(ok ? (hasMissing(segs) ? "Copied — but fill in the [bracketed] gaps first" : "Copied with italics — paste straight into your work")
+           : "Couldn't access the clipboard");
+}
+function flashButton(btn, ok) {
+  if (!btn) return;
+  btn.classList.add("done");
+  const old = btn.dataset.label ? btn.querySelector(".lbl") : null;
+  if (old) { old.textContent = ok ? "Copied" : "Failed"; }
+  clearTimeout(btn._t);
+  btn._t = setTimeout(() => { btn.classList.remove("done"); if (old) old.textContent = btn.dataset.label; }, 1400);
+}
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById("toast");
+  document.getElementById("toastMsg").textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2400);
+}
+
+/* =========================================================================
+   App state
+   ========================================================================= */
+let current = null;          // the citation on screen
+let list = loadList();       // saved reference list
+
+function loadList() {
+  try { return JSON.parse(localStorage.getItem("citator.list") || "[]"); } catch { return []; }
+}
+function saveList() { try { localStorage.setItem("citator.list", JSON.stringify(list)); } catch {} }
+
+const $ = (id) => document.getElementById(id);
+const resultEl = $("result");
+const ICON = {
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+  chev: '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>',
+  edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+  alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>',
+};
+
+const SOURCE_LABEL = {
+  doi: "Crossref / DOI record", html: "page metadata", youtube: "YouTube", twitter: "X / Twitter",
+  tiktok: "TikTok", wikipedia: "Wikipedia revision history", arxiv: "arXiv", pdf: "PDF file",
+  googlebooks: "Google Books", openlibrary: "Open Library", url: "the link only",
+};
+
+/* =========================================================================
+   Fetching
+   ========================================================================= */
+async function citeInput(raw, { addToList = false, quiet = false } = {}) {
+  raw = String(raw || "").trim();
+  if (!raw) return null;
+  if (!quiet) showLoading(raw);
+  let data;
+  try {
+    const res = await fetch("/api/cite?url=" + encodeURIComponent(raw));
+    data = await res.json();
+  } catch (e) {
+    data = { error: "Can't reach the Citator server. Check your connection and try again in a moment." };
+  }
+  if (data.error) {
+    if (!quiet) showError(data.error);
+    return null;
+  }
+  const r = Object.assign({}, data, {
+    id: "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    accessed: todayISO(),
+    input: raw,
+  });
+  if (!r.titleSentence) r.titleSentence = r.title;
+  r.authors = (r.authors || []).map(a => a.org != null ? { org: a.org } : { given: a.given || "", family: a.family || "" });
+  r.editors = (r.editors || []).map(a => a.org != null ? { org: a.org } : { given: a.given || "", family: a.family || "" });
+  if (addToList) { addRef(r, true); }
+  if (!quiet) { current = r; renderCurrent(true); }
+  return r;
+}
+
+function showLoading(raw) {
+  const host = (() => { try { return new URL(raw).hostname.replace(/^www\./, ""); } catch { return raw; } })();
+  resultEl.innerHTML = `<div class="card fresh"><div class="loading">
+      <div class="sk" style="width:38%"></div><div class="sk" style="width:92%"></div><div class="sk" style="width:76%"></div>
+      <div class="msg">Reading ${esc(host)}…</div></div></div>`;
+}
+function showError(msg) {
+  resultEl.innerHTML = `<div class="card fresh"><div class="error">${ICON.alert}<div>${esc(msg)}</div></div></div>`;
+}
+
+/* =========================================================================
+   Result card
+   ========================================================================= */
+function renderCurrent(focusCopy) {
+  const r = current;
+  if (!r) { resultEl.innerHTML = ""; return; }
+  const inList = list.some(x => x.id === r.id);
+  const lead = leadAuthor(r);
+  const notes = [...(r.warnings || [])];
+  if (lead.inferred) notes.unshift({
+      news: `No journalist named — using the newspaper (“${lead.list[0].org}”) as the author, as the guide says.`,
+      blog: `No author named — using the blog's name (“${lead.list[0].org}”) as the author.`,
+    }[r.type] || `No named author — using the organisation (“${lead.list[0].org}”) as the author, as the guide says.`);
+  if (!yearOf(r)) notes.unshift("No date found, so it shows “no date” (the guide's wording). Add a date below if the page shows one.");
+  if (settings.sentence && r.titleSentence && r.title && r.titleSentence !== r.title)
+    notes.push(`Title changed to sentence case per the guide. Original: “${r.title}”. Check proper nouns stayed capitalised.`);
+
+  const hostLine = r.url ? r.url : (r.isbn ? "ISBN " + r.isbn : "");
+  const warnDot = notes.length ? "warn" : "";
+  resultEl.innerHTML = `
+  <div class="card${focusCopy ? " fresh" : ""}" id="card">
+    <div class="card-head">
+      <select class="type-select" id="typeSel" aria-label="Source type">
+        ${Object.entries(TYPES).map(([k, v]) => `<option value="${k}" ${k === r.type ? "selected" : ""}>${v}</option>`).join("")}
+      </select>
+      <div class="src"><span class="dot ${warnDot}"></span><span>from ${esc(SOURCE_LABEL[r.source] || "page")}</span>${hostLine ? `<span>·</span><span class="u" title="${esc(hostLine)}">${esc(hostLine.replace(/^https?:\/\/(www\.)?/, ""))}</span>` : ""}</div>
+    </div>
+    <div class="ref-block">
+      <div class="label">Reference list entry</div>
+      <div class="reference" id="refOut"></div>
+    </div>
+    <div class="ref-actions">
+      <button class="btn btn-primary" id="copyRef" data-label="Copy reference">${ICON.copy}<span class="lbl">Copy reference</span></button>
+      <button class="btn btn-ghost" id="addRef" data-label="${inList ? "In your list" : "Add to list"}">${inList ? ICON.check : ICON.plus}<span class="lbl">${inList ? "In your list" : "Add to list"}</span></button>
+      <span class="spacer"></span>
+      <span class="hint" style="margin:0"><kbd>⏎</kbd> copy · <kbd>A</kbd> add</span>
+    </div>
+    <div class="intext">
+      <div class="intext-item"><div style="min-width:0"><div class="k">In-text</div><div class="v" id="inParen"></div></div><button class="copy-mini" id="copyParen" title="Copy">${ICON.copy}</button></div>
+      <div class="intext-item"><div style="min-width:0"><div class="k">Narrative</div><div class="v" id="inNarr"></div></div><button class="copy-mini" id="copyNarr" title="Copy">${ICON.copy}</button></div>
+    </div>
+    <div id="notes"></div>
+    <details class="edit" id="editBox">
+      <summary>${ICON.chev}${ICON.edit} Edit details <span class="sub">— changes update the reference instantly</span></summary>
+      <div class="fields" id="fields"></div>
+    </details>
+  </div>`;
+  renderOutputs();
+  renderNotes(notes);
+  renderFields();
+
+  $("typeSel").onchange = (e) => { current.type = e.target.value; syncToList(); renderCurrent(); $("editBox").open = true; };
+  $("copyRef").onclick = (e) => copySegs(formatReference(current), e.currentTarget);
+  $("copyParen").onclick = (e) => copySegs(formatInText(current).paren, e.currentTarget);
+  $("copyNarr").onclick = (e) => copySegs(formatInText(current).narr, e.currentTarget);
+  $("addRef").onclick = () => { addRef(current); renderCurrent(); };
+  if (focusCopy) {
+    $("copyRef").focus({ preventScroll: true });
+    const rect = $("card").getBoundingClientRect();
+    if (rect.bottom > innerHeight || rect.top < 0) $("card").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function renderOutputs() {
+  const r = current;
+  const withSuffix = list.find(x => x.id === r.id);
+  if (withSuffix) r._suffix = withSuffix._suffix;
+  $("refOut").innerHTML = segsToHTML(formatReference(r));
+  const it = formatInText(r);
+  $("inParen").innerHTML = segsToHTML(it.paren);
+  $("inNarr").innerHTML = segsToHTML(it.narr);
+}
+function renderNotes(notes) {
+  $("notes").innerHTML = notes.length
+    ? `<div class="warnings"><strong>Worth a quick check</strong><ul>${notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>` : "";
+}
+
+/* Field editor ---------------------------------------------------------- */
+const FIELD_DEFS = {
+  container: (t) => ({
+    webpage: ["Website / organisation", "Used as the author when no person is named"],
+    news: ["Newspaper", "Italicised; also used as author if no journalist is named"],
+    blog: ["Blog title", "Italicised"],
+    journal: ["Journal", "Full journal title, italicised"],
+    wikipedia: ["Wiki", ""],
+    report: ["Organisation", "Shown after the title when the author is a person"],
+    chapter: ["Book title", "Italicised"],
+    conference: ["Conference / proceedings title", "Italicised"],
+    preprint: ["Repository / institution", "e.g. arXiv, SSRN, University of St Andrews"],
+    podcast: ["Podcast / organisation", "Used as author when no presenter is named"],
+  }[t]),
+};
+const TYPE_FIELDS = {
+  webpage: ["container"],
+  news: ["container"],
+  blog: ["container", "blogDate"],
+  journal: ["container", "volume", "issue", "pages", "articleNumber", "doi"],
+  wikipedia: ["container"],
+  social: ["platform", "postTime"],
+  report: ["reportNumber", "container", "doi"],
+  book: ["edition", "place", "publisher", "doi"],
+  chapter: ["editors", "container", "place", "publisher", "pages", "doi"],
+  conference: ["container", "conferenceLocation", "conferenceDate", "pages", "doi"],
+  podcast: ["container"],
+  preprint: ["container", "doi"],
+};
+const SIMPLE = {
+  volume: ["Volume", "s2"], issue: ["Issue", "s2"], pages: ["Pages", "s2", "e.g. 73-77"],
+  articleNumber: ["Article number", "s3", "used if no pages"], doi: ["DOI", "s3", "preferred over the URL"],
+  platform: ["Platform", "s2", "YouTube, X, TikTok…"], postTime: ["Post time and date", "s4", "11:28 pm · 12 Jun 2023"],
+  reportNumber: ["Report number", "s2", "e.g. Cm 7656, QS135"], edition: ["Edition", "s2", "only if not 1st"],
+  place: ["Place of publication", "s2"], publisher: ["Publisher", "s2"],
+  conferenceLocation: ["Location", "s3", "Madrid, Spain"], conferenceDate: ["Conference dates", "s3", "26-28 September 2018"],
+  blogDate: ["Entry date", "s3", "YYYY-MM-DD"],
+};
+
+function renderFields() {
+  const r = current;
+  const f = $("fields");
+  const parts = [];
+  parts.push(`<div class="field"><label>${r.type === "chapter" ? "Chapter author(s)" : r.type === "social" ? "Screen name" : "Author(s)"} <span class="opt">— people or organisations</span></label>
+    <div class="authors-list" id="authorsList"></div>
+    <button class="btn btn-ghost btn-sm add-author" id="addAuthor" type="button">${ICON.plus} Add author</button></div>`);
+  parts.push(field("title", r.type === "social" ? "Post text / video title" : r.type === "chapter" ? "Chapter title" : "Title", "s6", "", settings.sentence ? (r.titleSentence ?? r.title) : r.title));
+  parts.push(field("date", r.type === "wikipedia" ? "Last updated" : "Date published", "s2", "YYYY or YYYY-MM-DD", r.date));
+  parts.push(field("accessed", "Accessed", "s2", "", r.accessed, "date"));
+  parts.push(field("url", "URL", "s2", "", r.url));
+  for (const k of TYPE_FIELDS[r.type] || []) {
+    if (k === "container") {
+      const [lab, help] = FIELD_DEFS.container(r.type) || ["Container", ""];
+      parts.push(field("container", lab, "s6", "", r.container, "text", help));
+    } else if (k === "editors") {
+      parts.push(field("editorsText", "Editor(s)", "s6", "Surname, Given; Surname, Given", (r.editors || []).map(e => isOrg(e) ? e.org : `${e.family}, ${e.given}`).join("; ")));
+    } else {
+      const [lab, span, ph] = SIMPLE[k];
+      parts.push(field(k, lab, span, ph || "", r[k]));
+    }
+  }
+  f.innerHTML = parts.join("");
+  renderAuthors();
+  f.querySelectorAll("[data-k]").forEach(inp => inp.addEventListener("input", onFieldInput));
+  f.querySelectorAll("[data-k=date],[data-k=blogDate]").forEach(inp => inp.addEventListener("change", (e) => {
+    e.target.value = parseLooseDate(e.target.value); onFieldInput(e);
+  }));
+  $("addAuthor").onclick = () => { current.authors.push({ given: "", family: "" }); renderAuthors(); refresh(); };
+}
+function field(k, label, span, ph, val, type = "text", help = "") {
+  return `<div class="field ${span}"><label for="f_${k}">${esc(label)}</label>
+    <input id="f_${k}" data-k="${k}" type="${type}" value="${esc(val ?? "")}" placeholder="${esc(ph)}">
+    ${help ? `<div class="help">${esc(help)}</div>` : ""}</div>`;
+}
+function onFieldInput(e) {
+  const k = e.target.dataset.k, v = e.target.value;
+  if (k === "title") { if (settings.sentence) current.titleSentence = v; else { current.title = v; } if (!settings.sentence) current.titleSentence = v; }
+  else if (k === "date") current.date = parseLooseDate(v) || v;
+  else if (k === "editorsText") current.editors = v.split(";").map(s => s.trim()).filter(Boolean).map(s => s.includes(",") ? { family: s.split(",")[0].trim(), given: s.split(",").slice(1).join(",").trim() } : { org: s });
+  else current[k] = v;
+  refresh();
+}
+function renderAuthors() {
+  const box = $("authorsList");
+  box.innerHTML = current.authors.map((a, i) => isOrg(a)
+    ? `<div class="author-row org" data-i="${i}">
+         <div class="seg"><button type="button" data-kind="person">Person</button><button type="button" class="on" data-kind="org">Org</button></div>
+         <input data-a="org" value="${esc(a.org)}" placeholder="Organisation or screen name">
+         <button class="rm" type="button" title="Remove">${ICON.x}</button></div>`
+    : `<div class="author-row" data-i="${i}">
+         <div class="seg"><button type="button" class="on" data-kind="person">Person</button><button type="button" data-kind="org">Org</button></div>
+         <input data-a="family" value="${esc(a.family)}" placeholder="Surname">
+         <input data-a="given" value="${esc(a.given)}" placeholder="Given names">
+         <button class="rm" type="button" title="Remove">${ICON.x}</button></div>`).join("")
+    || `<div class="help" style="font-size:12.5px;color:var(--ink-3)">No author — ${current.type === "social" ? "add the screen name." : "the organisation / title is used instead."}</div>`;
+  box.querySelectorAll(".author-row").forEach(row => {
+    const i = +row.dataset.i;
+    row.querySelectorAll("input").forEach(inp => inp.addEventListener("input", () => { current.authors[i][inp.dataset.a] = inp.value; refresh(); }));
+    row.querySelector(".rm").onclick = () => { current.authors.splice(i, 1); renderAuthors(); refresh(); };
+    row.querySelectorAll(".seg button").forEach(b => b.onclick = () => {
+      const a = current.authors[i];
+      if (b.dataset.kind === "org" && !isOrg(a)) current.authors[i] = { org: [a.given, a.family].filter(Boolean).join(" ") };
+      if (b.dataset.kind === "person" && isOrg(a)) {
+        const parts = a.org.trim().split(/\s+/); const family = parts.pop() || ""; current.authors[i] = { given: parts.join(" "), family };
+      }
+      renderAuthors(); refresh();
+    });
+  });
+}
+function refresh() {
+  syncToList();
+  renderOutputs();
+}
+function syncToList() {
+  const idx = list.findIndex(x => x.id === current.id);
+  if (idx >= 0) { list[idx] = JSON.parse(JSON.stringify(current)); saveList(); renderList(); }
+}
+
+/* =========================================================================
+   Reference list
+   ========================================================================= */
+function sortKey(r) {
+  return segsToText(formatReference(r)).replace(/^['‘"“\[]+/, "").toLowerCase();
+}
+function assignSuffixes() {
+  // Same author(s) + same year -> 2025a, 2025b … in the order they were added (cited)
+  const groups = {};
+  list.forEach(r => { r._suffix = ""; });
+  const ordered = [...list].sort((a, b) => (a.addedAt || 0) - (b.addedAt || 0));
+  for (const r of ordered) {
+    const lead = leadAuthor(r);
+    if (lead.kind !== "authors") continue;
+    const key = authorsRef(lead.list).toLowerCase() + "|" + (yearOf(r) || "no date");
+    (groups[key] = groups[key] || []).push(r);
+  }
+  for (const g of Object.values(groups)) if (g.length > 1) g.forEach((r, i) => { r._suffix = String.fromCharCode(97 + i); });
+}
+function sortedList() {
+  assignSuffixes();
+  return [...list].sort((a, b) => sortKey(a).localeCompare(sortKey(b), "en-GB") || yearLabel(a).localeCompare(yearLabel(b)));
+}
+function addRef(r, silent) {
+  if (list.some(x => x.id === r.id)) { if (!silent) toast("Already in your list"); return; }
+  const dupe = list.find(x => x.url && x.url === r.url && x.type === r.type);
+  if (dupe) { if (!silent) toast("That source is already in your list"); return; }
+  r.addedAt = Date.now();
+  list.push(JSON.parse(JSON.stringify(r)));
+  saveList(); renderList();
+  if (!silent) toast("Added to your reference list");
+}
+function renderList() {
+  $("listCount").textContent = list.length;
+  const box = $("listBox");
+  if (!list.length) {
+    box.innerHTML = `<div class="empty">Nothing here yet. Cite a link and press <kbd>A</kbd> (or “Add to list”) to start your reference list.</div>`;
+    $("copyList").disabled = $("clearList").disabled = true;
+    return;
+  }
+  $("copyList").disabled = $("clearList").disabled = false;
+  box.innerHTML = sortedList().map(r => {
+    const it = formatInText(r);
+    return `<div class="list-item" data-id="${r.id}">
+      <div style="min-width:0">
+        <div class="reference">${segsToHTML(formatReference(r))}</div>
+        <div class="meta">${esc(TYPES[r.type] || "")} · in-text ${segsToHTML(it.paren)}</div>
+      </div>
+      <div class="acts">
+        <button class="copy-mini" data-act="copy" title="Copy reference">${ICON.copy}</button>
+        <button class="copy-mini" data-act="edit" title="Edit">${ICON.edit}</button>
+        <button class="copy-mini" data-act="del" title="Remove">${ICON.x}</button>
+      </div></div>`;
+  }).join("");
+  box.querySelectorAll(".list-item").forEach(row => {
+    const r = list.find(x => x.id === row.dataset.id);
+    row.querySelector('[data-act=copy]').onclick = (e) => copySegs(formatReference(r), e.currentTarget);
+    row.querySelector('[data-act=edit]').onclick = () => {
+      current = JSON.parse(JSON.stringify(r)); renderCurrent(); $("editBox").open = true;
+      resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    row.querySelector('[data-act=del]').onclick = () => {
+      list = list.filter(x => x.id !== r.id); saveList(); renderList();
+      if (current && current.id === r.id) renderCurrent();
+    };
+  });
+}
+
+$("copyList").onclick = async (e) => {
+  const items = sortedList().map(formatReference);
+  const ok = await copyRich(wrapForClipboard(items.map(s => segsToHTML(s, { forClipboard: true }))), items.map(segsToText).join("\n"));
+  toast(ok ? `Copied ${items.length} reference${items.length === 1 ? "" : "s"} in alphabetical order` : "Couldn't access the clipboard");
+};
+$("clearList").onclick = () => {
+  if (!list.length) return;
+  if (!confirm(`Remove all ${list.length} references from your list?`)) return;
+  list = []; saveList(); renderList(); if (current) renderCurrent();
+};
+$("goList").onclick = () => $("listSection").scrollIntoView({ behavior: "smooth" });
+
+/* =========================================================================
+   Input handling
+   ========================================================================= */
+function extractInputs(text) {
+  text = String(text || "").trim();
+  if (!text) return [];
+  const found = [];
+  for (const line of text.split(/\n+/)) {
+    const l = line.trim();
+    if (!l) continue;
+    const urls = l.match(/https?:\/\/[^\s<>"']+/g);
+    if (urls) { urls.forEach(u => found.push(u.replace(/[),.;\]]+$/, ""))); continue; }
+    const doi = l.match(/\b(?:doi:\s*)?(10\.\d{4,9}\/\S+)/i);
+    if (doi) { found.push(doi[1].replace(/[),.;\]]+$/, "")); continue; }
+    if (/^(isbn:?\s*)?[\dXx][\d\-\sXx]{8,16}$/i.test(l)) { found.push(l.replace(/^isbn:?\s*/i, "")); continue; }
+    if (/^[\w-]+(\.[\w-]+)+(\/\S*)?$/.test(l)) { found.push(l); continue; }
+  }
+  if (!found.length) found.push(text);
+  return [...new Set(found)];
+}
+async function runInputs(items) {
+  if (!items.length) return;
+  if (items.length === 1) { await citeInput(items[0]); return; }
+  showLoading(items[0]);
+  let n = 0, ok = 0, last = null;
+  const failed = [];
+  for (const it of items) {
+    n++;
+    const msg = resultEl.querySelector(".msg");
+    if (msg) msg.textContent = `Citing ${n} of ${items.length}…`;
+    const r = await citeInput(it, { addToList: true, quiet: true });
+    if (r) { ok++; last = r; } else failed.push(it);
+  }
+  if (last) { const saved = list.find(x => x.id === last.id); current = JSON.parse(JSON.stringify(saved || last)); renderCurrent(true); }
+  else showError("None of those could be read. Check the links and try again.");
+  toast(failed.length ? `Added ${ok} of ${items.length} — couldn't read: ${failed.join(", ").slice(0, 80)}`
+                      : `Added ${ok} sources to your reference list`);
+}
+
+$("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  runInputs(extractInputs($("url").value));
+});
+document.addEventListener("paste", (e) => {
+  const t = e.target;
+  const editing = t && (t.closest && t.closest(".fields"));
+  if (editing) return;
+  const text = (e.clipboardData || window.clipboardData).getData("text");
+  const items = extractInputs(text);
+  const looksCitable = items.length && (/^https?:\/\//.test(items[0]) || /^10\.\d{4,}\//.test(items[0]) || /^[\d\-\sXx]{10,17}$/.test(items[0]));
+  if (!looksCitable) return;
+  e.preventDefault();
+  $("url").value = items.length > 1 ? `${items.length} links` : items[0];
+  runInputs(items);
+});
+document.addEventListener("keydown", (e) => {
+  const tag = (e.target.tagName || "").toLowerCase();
+  const typing = ["input", "textarea", "select"].includes(tag) || e.target.isContentEditable;
+  if (e.key === "Escape") { $("settings").classList.remove("open"); if (!typing) { $("url").value = ""; $("url").focus(); } }
+  if (typing) return;
+  if (e.key === "/") { e.preventDefault(); $("url").focus(); $("url").select(); }
+  if ((e.key === "a" || e.key === "A") && current && !e.metaKey && !e.ctrlKey) { addRef(current); renderCurrent(); }
+  if (e.key === "c" && (e.metaKey || e.ctrlKey) && current && !getSelection().toString()) {
+    e.preventDefault(); copySegs(formatReference(current), $("copyRef"));
+  }
+});
+
+/* Settings / theme ------------------------------------------------------ */
+$("settingsBtn").onclick = (e) => { e.stopPropagation(); $("settings").classList.toggle("open"); };
+document.addEventListener("click", (e) => { if (!e.target.closest("#settings")) $("settings").classList.remove("open"); });
+$("setSentence").checked = settings.sentence;
+$("setPad").checked = settings.pad;
+$("setFont").value = settings.font;
+$("setSentence").onchange = (e) => { settings.sentence = e.target.checked; saveJSON("citator.settings", settings); renderAll(); };
+$("setPad").onchange = (e) => { settings.pad = e.target.checked; saveJSON("citator.settings", settings); renderAll(); };
+$("setFont").onchange = (e) => { settings.font = e.target.value; saveJSON("citator.settings", settings); };
+function renderAll() { renderList(); if (current) renderCurrent(); }
+
+(function theme() {
+  let t = null;
+  try { t = localStorage.getItem("citator.theme"); } catch {}
+  if (t) document.documentElement.dataset.theme = t;
+  $("themeBtn").onclick = () => {
+    const dark = document.documentElement.dataset.theme
+      ? document.documentElement.dataset.theme === "dark"
+      : matchMedia("(prefers-color-scheme: dark)").matches;
+    const next = dark ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("citator.theme", next); } catch {}
+  };
+})();
+
+renderList();
+</script>
+</body>
+</html>

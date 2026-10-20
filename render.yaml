@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: manchester-citator
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/ping
